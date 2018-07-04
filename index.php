@@ -28,7 +28,9 @@
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- daterange picker -->
-  <link rel="stylesheet" href="../../bower_components/bootstrap-daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -97,7 +99,7 @@
         <li class="header">MENU DE NAVEGAÇÃO</li>
         <li class="active treeview">
           <a href="#">
-            <i class="fa fa-user"></i> <span>Alunos</span>
+            <i class="fa fa-user"></i> <span>Aluno</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -110,37 +112,37 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-check"></i> <span>Turmas</span>
+            <i class="fa fa-users"></i> <span>Turma</span>
           </a>
           <ul class="treeview-menu">
             <li><a href="<?php echo "index.php?area=cad_turma"?>"><i class="fa fa-circle-o"></i> Cadastrar</a></li>
-            <li><a href="<?php echo "index.php?area=cad_turma"?>"><i class="fa fa-circle-o"></i> Listar</a></li>
+            <li><a href="<?php echo "index.php?area=list_turma"?>"><i class="fa fa-circle-o"></i> Listar</a></li>
           </ul>
         </li>
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-check"></i> <span>Aulas</span>
+            <i class="fa fa-child"></i> <span>Aula</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo "index.php?area=cad_"?>"><i class="fa fa-circle-o"></i> Abrir Aula</a></li>
+            <li><a href="<?php echo "index.php?area=cad_aula"?>"><i class="fa fa-circle-o"></i> Abrir Aula</a></li>
             <li><a href="<?php echo "index.php?area=cad_"?>"><i class="fa fa-circle-o"></i> Fechar Aula</a></li>
           </ul>
         </li>
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-check"></i> <span>Avaliação</span>
+            <i class="fa fa-file-text-o"></i> <span>Avaliação</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo "index.php?area=cad_"?>"><i class="fa fa-circle-o"></i> Cadastrar </a></li>
+            <li><a href="<?php echo "index.php?area=cad_avaliação"?>"><i class="fa fa-circle-o"></i> Cadastrar </a></li>
             <li><a href="<?php echo "index.php?area=cad_"?>"><i class="fa fa-circle-o"></i> Listar </a></li>
           </ul>
         </li>
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-dollar"></i> <span>Pagamentos</span>
+            <i class="fa fa-dollar"></i> <span>Pagamento</span>
           </a>
           <ul class="treeview-menu">
             <li><a href="<?php echo "index.php?area=cad_pagamentos"?>"><i class="fa fa-circle-o"></i>Receber</a></li>
@@ -177,20 +179,44 @@
       ini_set( 'display_errors', 0 );
       switch ($_GET['area']) {
         case 'cad_aluno':
-            include('cad_aluno.php') ; 
+           include('cad_aluno.php') ; 
           break;
+
+        case 'list_aluno':
+           include('list_aluno.php') ; 
+         break;
+
+        case 'edit_aluno':
+           include('edit_aluno.php') ; 
+         break;
 
         case 'cad_turma':
-            include('cad_turma.php') ; 
-          break;
+           include('cad_turma.php') ; 
+         break;
 
-          case 'cad_pagamentos':
-            include('cad_pagamentos.php') ; 
-          break;  
+        case 'list_turma':
+           include('list_turma.php') ; 
+         break;
 
-          case 'list_aluno':
-            include('list_aluno.php') ; 
-          break;
+        case 'edit_turma':
+           include('edit_turma.php') ; 
+         break;
+
+         case 'cad_aula':
+           include('cad_aula.php') ; 
+         break;
+
+        case 'cad_pagamentos':
+           include('cad_pagamentos.php') ; 
+         break;
+
+        case 'list_pagamentos':
+           include('list_pagamentos.php') ; 
+         break; 
+
+        case 'cad_avaliação':
+           include('cad_avaliação.php') ; 
+         break;             
         
         default:
             include('home.php');
@@ -299,6 +325,12 @@
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<!-- Select2 -->
+<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+<!-- InputMask -->
+<script src="plugins/input-mask/jquery.inputmask.js"></script>
+<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
 <script>
   $(function () {
@@ -310,6 +342,74 @@
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false
+    })
+  })
+</script>
+
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+
+    //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Today'       : [moment(), moment()],
+          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+
+    //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true
+    })
+
+    //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass   : 'iradio_minimal-red'
+    })
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    //Timepicker
+    $('.timepicker').timepicker({
+      showInputs: false
     })
   })
 </script>

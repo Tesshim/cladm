@@ -19,7 +19,7 @@ include('dbconnection.php');
               <div class="box-body">
                 <div class="form-group">
                   <label for="rg">RG</label>
-                  <input required name="rg"type="text" class="form-control" id="rg" placeholder="RG">
+                  <input required name="rg" type="text" class="form-control" id="rg" placeholder="RG">
                 </div>
               </div>
 
@@ -40,7 +40,7 @@ include('dbconnection.php');
               <div class="box-body">
                 <div class="form-group">
                   <label for="cadastro">Tipo de Cadastro</label>
-                  <input required name="tcadastro"type="text" class="form-control" id="tcadastro" placeholder="Tipo de Cadastro">
+                  <input required name="tcadastro" type="text" class="form-control" id="tcadastro" placeholder="Tipo de Cadastro">
                 </div>
               </div>
               <!-- /.box-body -->
@@ -56,9 +56,12 @@ include('dbconnection.php');
           		if (isset($_POST['enviar'])) {
           			$nome = $_POST['nome_aluno'];
           			$telefone = $_POST['telefone'];
+                $rg = $_POST['rg'];
+                $endereco = $_POST['endereco'];
+                $cadastro = $_POST['tcadastro'];
 
           			$sql = "INSERT INTO aluno
-          			(nome, telefone) values ('$nome', '$telefone')";
+          			(nome, telefone, rg, endereco, cadastro) values ('$nome', '$telefone', '$rg', '$endereco', '$cadastro')";
 
           			mysqli_query($conn, $sql);
 

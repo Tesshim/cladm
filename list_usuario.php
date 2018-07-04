@@ -1,14 +1,14 @@
 <?php
 include('dbconnection.php');
 
-$sql = "SELECT * FROM aluno ORDER BY nome";
+$sql = "SELECT * FROM tb_usuario ORDER BY nome_usuario";
 $q_cliente = mysqli_query($conn, $sql);
 
 ?>
 
 <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Lista de Alunos</h3>
+              <h3 class="box-title">Listar Alunos</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -37,8 +37,6 @@ $q_cliente = mysqli_query($conn, $sql);
                   <th>ID Aluno</th>
                   <th>Nome Aluno</th>
                   <th>Telefone</th>
-                  <th>RG</th>
-                  <th>Cadastro</th>
                   <th>Ações</th>
                 </tr>
                 </thead>
@@ -51,8 +49,6 @@ $q_cliente = mysqli_query($conn, $sql);
                         <td><?php echo ($linha_cliente["id_aluno"]);?> </td>
                         <td><?php echo ($linha_cliente["nome"]);?> </td>
                         <td><?php echo ($linha_cliente["telefone"]);?> </td>
-                        <td><?php echo ($linha_cliente["rg"]);?> </td>
-                        <td><?php echo ($linha_cliente["cadastro"]);?> </td>
                         <td>
                           <a href="index.php?area=edit_aluno&id_aluno=<?php echo $linha_cliente['id_aluno']; ?>"><button name="editar" type="submit" class="btn btn-primary">Editar</button></a>
 
@@ -69,8 +65,6 @@ $q_cliente = mysqli_query($conn, $sql);
                   <th>ID Aluno</th>
                   <th>Nome Aluno</th>
                   <th>Telefone</th>
-                  <th>RG</th>
-                  <th>Cadastro</th>
                   <th>Ações</th>
                 </tr>
                 </tfoot>

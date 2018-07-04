@@ -11,8 +11,8 @@ include('dbconnection.php');
             <form method="POST" action="">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="nome_turma">Turma</label>
-                  <input required name="aula" type="text" class="form-control" id="nome_turma" placeholder="Entre com o nome">
+                  <label for="turma">Turma</label>
+                  <input required name="turma" type="text" class="form-control" id="turma" placeholder="Entre com o nome">
                 </div>
               </div>
 
@@ -44,23 +44,25 @@ include('dbconnection.php');
           <?php  
               if (isset($_POST['enviar'])) 
               {
-                $nome = $_POST['aula'];
+                $nome = $_POST['turma'];
+                $iturma = $_POST['iturma'];
+                $tturma = $_POST['tturma'];
 
-                $sql = "INSERT INTO Aula
-                (nome_aula) values ('$nome')";
+                $sql = "INSERT INTO tb_turma
+                (nome_turma, inicio_turma, termino_turma) values ('$nome', '$iturma', '$tturma')";
 
                 mysqli_query($conn, $sql);
 
                 if($conn != 0)  
                 {
                   echo '<div class="alert alert-success" role="alert">
-                  Aluno cadastrado com sucesso!
+                  Turma cadastrada com sucesso!
                   </div>';
                 } 
                 else
                 {
                   echo '<div class="alert alert-danger" role="alert">
-                    Aluno não cadastrado!
+                    Turma não cadastrada!
                   </div>';
                 }
               }
