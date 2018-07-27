@@ -1,3 +1,8 @@
+<?php
+    include('dbconnection.php');
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,13 +41,14 @@
   <div class="login-box-body">
     <p class="login-box-msg">Faça login para começar a seção</p>
 
-    <form action="../../index2.html" method="post">
+     <!-- begin form -->
+    <form action="validacao.php" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <input type="email" class="form-control" placeholder="Email" id="email" name="email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" class="form-control" placeholder="Password" id="senha" name="senha">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -55,11 +61,23 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat" id="enviar">Entrar</button>
         </div>
         <!-- /.col -->
       </div>
+
+
+<?php
+    if(isset($_POST['enviar']))
+    {
+      $email = $_POST['email'];
+      $senha = $_POST['senha'];
+    }
+
+?>
+
     </form>
+    <!-- end form -->
 
     <div class="social-auth-links text-center">
       <p> OU</p>

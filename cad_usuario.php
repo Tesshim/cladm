@@ -44,8 +44,10 @@ include('dbconnection.php');
           			$email = $_POST['email'];
                 $senha = $_POST['senha'];
 
+                $senhaMD5 = md5($senha);
+
           			$sql = "INSERT INTO tb_usuario
-          			(nome_usuario, email_usuario, senha_usuario) values ('$nome', '$email', '$senha')";
+          			(nome_usuario, email_usuario, senha_usuario) values ('$nome', '$email', '$senhaMD5')";
 
           			mysqli_query($conn, $sql);
 

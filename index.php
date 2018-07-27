@@ -1,3 +1,18 @@
+<?php
+  include('dbconnection.php');
+
+  ob_start();
+  session_start();
+
+  ini_set( 'display_errors', 0 );
+  $email = $_SESSION[login];
+  $validacao = $_SESSION[validacao];
+  $id_usuario = $_SESSION[id_usuario];
+
+  if($validacao == "3")
+  {
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -416,3 +431,11 @@
 
 </body>
 </html>
+
+
+<?php
+}
+else {
+  echo "<a href=login.php";
+}
+?>
