@@ -46,7 +46,7 @@ include('dbconnection.php');
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button name="enviar" type="submit" class="btn btn-primary">Cadastrar</button>
+                <button name="enviar" id="enviar" type="submit" class="btn btn-primary">Cadastrar</button>
               </div>
             </form>
           </div>
